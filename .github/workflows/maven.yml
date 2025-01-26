@@ -20,5 +20,18 @@ jobs:
       run: mvn package --file pom.xml
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
-    - name: Update dependency graph
-      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
+    #- name: Update dependency graph
+     # uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
+    - uses: actions/upload-artifact@v4
+      with:
+         name: Boardname
+         path: target/*.jar
+    - name: Trivy FS scan
+      run: 
+        trivy fs --format table -o trivy-fs-report.html .
+    - name: SonarQube Scan
+      uses: sonarsource/sonarqube-scan-action@master
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_HOST }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        
