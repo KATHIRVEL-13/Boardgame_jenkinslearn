@@ -3,7 +3,6 @@ name: GithubAction pipeline
 on:
   push:
     branches: [ "main" ]
-
 jobs:
   build:
 
