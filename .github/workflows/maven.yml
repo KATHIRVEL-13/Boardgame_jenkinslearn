@@ -27,7 +27,7 @@ jobs:
          name: Boardname
          path: target/*.jar
     - name: Trivy FS scan
-      run: 
+      run: |
         trivy fs --format table -o trivy-fs-report.html .
     - name: SonarQube Scan
       uses: sonarsource/sonarqube-scan-action@master
@@ -48,7 +48,7 @@ jobs:
     - name: Set up Dcoker Buildx
     - uses: docker/setup-buildx-action@v3
     - name: Build Docker Image
-      run:
+      run: |
         docker build -t kathirvel13/githubaction_boardgame:latest .
     - name: Trivy Image Scan
       run:
@@ -59,7 +59,7 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB.TOKEN }}
     - name: Push Docker Image
-      run:
+      run: |
         docker push kathirvel13/githubaction_boardgame:latest
     - name: Kubectl Action
       uses: tale/kubectl-action@v1
