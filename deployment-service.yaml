@@ -14,12 +14,11 @@ spec:
         app: boardgame
     spec:
       containers:
-        - name: boardgame
-          image: kathirvel13/githubaction_boardgame:latest # Image that will be used to containers in the cluster
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 8080 # The port that the container is running on in the cluster
-
+      - name: boardgame
+        image: kathirvel13/githubaction_boardgame:latest # Image that will be used to containers in the cluster
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080 # The port that the container is running on in the cluster
 
 ---
 
@@ -32,7 +31,7 @@ spec:
   selector:
     app: boardgame
   ports:
-    - protocol: "TCP"
-      port: 8080 
-      targetPort: 8080 
+  - protocol: "TCP"
+    port: 8080
+    targetPort: 8080
   type: LoadBalancer # type of the service.
