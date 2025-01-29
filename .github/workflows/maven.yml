@@ -67,11 +67,6 @@ jobs:
         run: |
           docker push kathirvel13/githubaction_boardgame:latest
 
-      - name: Install Minikube
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y minikube
-
       - name: Kubectl Action
         uses: tale/kubectl-action@v1
         with:
