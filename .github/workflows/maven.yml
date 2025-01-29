@@ -69,7 +69,8 @@ jobs:
 
       - name: Minikube Start
         run: |
-          minikube start
+          echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > kube_config
+          minikube start --config=kube_config
 
       - name: Deploy to Kubernetes
         run: |
