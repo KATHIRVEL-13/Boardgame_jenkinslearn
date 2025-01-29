@@ -67,16 +67,10 @@ jobs:
         run: |
           docker push kathirvel13/githubaction_boardgame:latest
 
-      - name: Minikube Start
-        run: |
-          echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > kube_config
-          minikube start --config=kube_config
-
-      - name: Deploy to Kubernetes
-        run: |
+      - name: Kubectl Action
+        uses: tale/kubectl-action@v1
+        with:
+         base64-kube-config: ${{ secrets.KUBE_CONFIG }}
+      - run: |
           kubectl apply -f deployment-service.yaml -n webapps
           kubectl get svc -n webapps
-
-      - name: Minikube Stop
-        run: |
-          minikube stop
